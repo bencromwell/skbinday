@@ -18,7 +18,7 @@ def output_week(week, html=False):
     week_output = []
     for date, bin_days in week.items():
         if html:
-            week_output.append('<h3>{}</h3>'.format(date))
+            week_output.append('<h3>{}</h3>'.format(date.strftime("%a %d %B %Y")))
         for bin_day in bin_days:
             if html:
                 content = "{}<br>".format(bin_day.name)
@@ -103,7 +103,7 @@ def run(urn):
         py_date = parse_date(date)
 
         bin_day = BinDay(title, py_date)
-        index = py_date.strftime("%a %d %B %Y")
+        index = py_date
 
         difference = py_date - datetime.utcnow()
 
@@ -111,4 +111,5 @@ def run(urn):
 
         add_to_week(add_to, index, bin_day)
 
+    future = dict(sorted(future.items()))
     send_notification(this_week, future)
