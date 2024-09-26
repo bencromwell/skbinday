@@ -47,10 +47,10 @@ $ skbinday -u 1000000042
 
 ## Installation
 
-With a venv or clone the repo and run:
+With an activated venv run:
 
 ```bash
-$ python3 setup.py install
+$ pip install .
 ```
 
 Optional cron entry, the bash script merely sets the environment variables and calls `skbinday` with the appropriate URN.
