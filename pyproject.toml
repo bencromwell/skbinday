@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "skbinday"
+version = "1.0.0"
+description = ""
+authors = [
+    { name = "Ben Cromwell", email = "683855+bencromwell@users.noreply.github.com" },
+]
+license = { text = "MIT" }
+dependencies = ["requests", "setuptools", "beautifulsoup4"]
+readme = "README.md"
+requires-python = ">=3.6"
+
+[project.urls]
+homepage = "https://github.com/bencromwell/skbinday"
+
+[project.scripts]
+skbinday = "skbinday.command_line:main"
