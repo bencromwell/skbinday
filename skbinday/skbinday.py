@@ -7,6 +7,10 @@ from skbinday.emailtemplate import get_email_html
 
 BASE_URL = 'https://myaccount.stockport.gov.uk/bin-collections/show'
 
+HEADERS = {
+    'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36',
+}
+
 BinDay = namedtuple('BinDay', ('name', 'date'))
 
 
@@ -88,9 +92,16 @@ def rchop(s, suffix):
 
 def run(urn):
     url = "{}/{}".format(BASE_URL, urn)
-    res = requests.get(url)
+    res = requests.get(url, headers=HEADERS)
+    res.raise_for_status()
     soup = BeautifulSoup(res.text, 'html.parser')
     bins = soup.find(class_='bin-collection')
+
+    if bins is None:
+        raise RuntimeError(
+            "Could not find bin collections on the page for URN {}. "
+            "Check the URN is valid.".format(urn)
+        )
 
     this_week = {}
     future = {}
